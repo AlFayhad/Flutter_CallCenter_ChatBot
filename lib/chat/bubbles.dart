@@ -12,7 +12,7 @@ class DashBubble extends StatelessWidget {
       child: BubbleNormal(
         text: message,
         isSender: false,
-        color: const Color.fromARGB(255, 228, 228, 228),
+        color: Color.fromARGB(255, 155, 152, 152),
         tail: true,
       ),
     );

@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:linkify/linkify.dart';
 
 import '../../api/chat_manager.dart';
-import './link_preview_bubble.dart';
+// import './link_preview_bubble.dart';
 import 'dart:async';
 import 'dart:math';
 
@@ -53,17 +53,17 @@ class _ChatState extends State<Chat> {
     );
   }
 
-  String? getLink(String input) {
-    List<LinkifyElement> links = linkify(input);
+  // String? getLink(String input) {
+  //   List<LinkifyElement> links = linkify(input);
 
-    for (LinkifyElement element in links) {
-      if (element is LinkableElement) {
-        return element.url;
-      }
-    }
+  //   for (LinkifyElement element in links) {
+  //     if (element is LinkableElement) {
+  //       return element.url;
+  //     }
+  //   }
 
-    return null;
-  }
+  //   return null;
+  // }
 
   void getMessages() {
     setState(() {
@@ -96,49 +96,54 @@ class _ChatState extends State<Chat> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10),
-      child: Column(children: [
-        Expanded(
-          child: ListView.builder(
-              controller: scrollController,
-              itemCount: messages.length,
-              itemBuilder: (context, index) {
-                String message = messages[index].message;
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        child: Column(children: [
+          Expanded(
+            child: ListView.builder(
+                controller: scrollController,
+                itemCount: messages.length,
+                itemBuilder: (context, index) {
+                  String message = messages[index].message;
 
-                Widget text = messages[index].sender == 'Dash'
-                    ? DashBubble(message: message)
-                    : UserBubble(
-                        message: message,
-                        userImage:
-                            'https://yt3.ggpht.com/ytc/AKedOLSepRT0gjLvp3HSmlNpdM7GHfwmBj8Cegc1s0mWKQ=s900-c-k-c0x00ffffff-no-rj');
+                  Widget text = messages[index].sender == 'Dash'
+                      ? DashBubble(message: message)
+                      : UserBubble(
+                          message: message,
+                          userImage:
+                              'https://yt3.ggpht.com/ytc/AKedOLSepRT0gjLvp3HSmlNpdM7GHfwmBj8Cegc1s0mWKQ=s900-c-k-c0x00ffffff-no-rj');
 
-                String? link = getLink(message);
+                  // String? link = getLink(message);
 
-                if (link != null) {
-                  return Column(
-                    children: [
-                      text,
-                      LinkBubble(link: link),
-                    ],
-                  );
-                }
+                  // if (link != null) {
+                  //   return Column(
+                  //     children: [
+                  //       text,
+                  //       LinkBubble(link: link),
+                  //     ],
+                  //   );
+                  // }
 
-                return text;
-              }),
-        ),
-        TextField(
-          controller: controller,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            hintText: 'Start typing',
-            suffixIcon: GestureDetector(
-              child: Icon(Icons.send),
-              onTap: onSend,
+                  return text;
+                }),
+          ),
+          TextField(
+            controller: controller,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              hintText: 'Start typing',
+              suffixIcon: GestureDetector(
+                child: Icon(Icons.send),
+                onTap: onSend,
+              ),
             ),
           ),
-        ),
-      ]),
+        ]),
+      ),
     );
   }
 }

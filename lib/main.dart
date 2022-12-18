@@ -1,3 +1,4 @@
+import 'package:callcenter_itbank/pages/homepage.dart';
 import 'package:callcenter_itbank/pages/intro.dart';
 import 'package:callcenter_itbank/chat/chat.dart';
 import 'package:callcenter_itbank/pages/intro.dart';
@@ -20,9 +21,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      home: Scaffold(
-        body: Intro(),
-      ),
+      debugShowCheckedModeBanner: false,
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: LoginPage(),
     );
   }
 }

@@ -1,10 +1,16 @@
+import 'package:callcenter_itbank/pages/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:lottie/lottie.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController getUserC = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +35,13 @@ class LoginPage extends StatelessWidget {
             height: 20,
           ),
           TextField(
+            textCapitalization: TextCapitalization.sentences,
             decoration: InputDecoration(
               labelText: 'Dengan siapa kami berbicara?',
               border:
                   OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
             ),
+            controller: getUserC,
           ),
           SizedBox(
             height: 10,
@@ -44,7 +52,10 @@ class LoginPage extends StatelessWidget {
                 width: 150,
                 height: 35,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () =>
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => HomePage(user: getUserC.text),
+                  )),
                   child: Text("Masuk"),
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
@@ -64,6 +75,10 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
+}
+
+class UserName {
+  static var getUserC = TextEditingController();
 }
 
 // background: rgba(79, 82, 255, 1);
